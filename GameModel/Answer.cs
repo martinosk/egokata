@@ -10,6 +10,19 @@
 
         public Player AnsweringPlayer { get; }
         public Option AnsweredOption { get; }
+        
+        private bool IsCorrect(Answer guess)
+        {
+            return guess.AnsweredOption == AnsweredOption;
+        }
 
+        public void EvaluateGuess(Answer guess)
+        {
+            if (IsCorrect(guess))
+            {
+                guess.AnsweringPlayer.AwardPoints(2);
+                AnsweringPlayer.AwardPoints(1);
+            }
+        }
     }
 }

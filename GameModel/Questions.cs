@@ -6,6 +6,8 @@ namespace GameModel
     {
         private readonly Stack<Question> RemainingQuestions = new Stack<Question>();
 
+        public int QuestionsLeft => RemainingQuestions.Count;
+
         public void AddQuestion(Question question)
         {
             RemainingQuestions.Push(question);
@@ -13,7 +15,7 @@ namespace GameModel
 
         public Question GetNextQuestion()
         {
-            if (RemainingQuestions.Count == 0)
+            if (QuestionsLeft == 0)
                 throw new NoMoreQuestionsLeftInGame();
 
             return RemainingQuestions.Pop();

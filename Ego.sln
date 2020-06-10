@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameModel", "GameModel\GameModel.csproj", "{005C4E27-2BCF-49D4-A053-D6AA443DA988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameModel", "GameModel\GameModel.csproj", "{005C4E27-2BCF-49D4-A053-D6AA443DA988}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUi", "ConsoleUi\ConsoleUi.csproj", "{80575998-F4CA-4247-8229-7901B66D90FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{005C4E27-2BCF-49D4-A053-D6AA443DA988}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005C4E27-2BCF-49D4-A053-D6AA443DA988}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005C4E27-2BCF-49D4-A053-D6AA443DA988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80575998-F4CA-4247-8229-7901B66D90FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80575998-F4CA-4247-8229-7901B66D90FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80575998-F4CA-4247-8229-7901B66D90FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80575998-F4CA-4247-8229-7901B66D90FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
