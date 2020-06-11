@@ -1,11 +1,11 @@
-﻿using System.Globalization;
+﻿using System;
 
 namespace GameModel
 {
     public class QuestionBuilder
     {
-        private string text;
-        private Options options;
+        private string? text;
+        private Options? options;
 
         public QuestionBuilder WithText(string text)
         {
@@ -19,9 +19,12 @@ namespace GameModel
             return this;
         }
 
-
         public Question Build()
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text), "Question needs a text");
+            if (options is null)
+                throw new ArgumentNullException(nameof(options), "Question needs some options");
             return new Question(text, options);
         }
 
@@ -38,13 +41,25 @@ namespace GameModel
             Guesses.AddGuess(guess);
         }
 
+        internal bool AllHasGuessed(Players participants)
+        {
+            foreach(var player in participants.Participants)
+            {
+                if (player == Answer.AnsweringPlayer)
+                    continue;
+
+                if (!Guesses.HasGuessed(player))
+                    return false;
+            }
+            return true;
+        }
+
         public AnsweredQuestion(Question question, Answer answer)
         {
             Text = question.Text;
             Answer = answer;
         }
     }
-
 
     public class Question
     {
@@ -60,5 +75,4 @@ namespace GameModel
             return new AnsweredQuestion(this, answer);
         }
     }
-
 }

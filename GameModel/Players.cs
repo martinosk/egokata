@@ -7,7 +7,7 @@ namespace GameModel
     {
         private readonly List<Player> participants = new List<Player>();
 
-        public IEnumerable<Player> Participants => participants; 
+        public IList<Player> Participants => participants; 
         
         public void AddPlayer(Player player)
         {

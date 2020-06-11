@@ -7,9 +7,15 @@ namespace GameModel
         public string Name { get; }
         public int Score { get; private set; }
 
+
         public void AwardPoints(int increment)
         {
             Score += increment;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         public override bool Equals(object obj)

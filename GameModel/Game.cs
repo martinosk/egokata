@@ -5,14 +5,21 @@ namespace GameModel
     public interface PlayerBuilder
     {
         PlayerBuilder AddPlayer(Player player);
-        QuestionsBuilder AddQuestion(Question question);
+        QuestionsBuilder WithQuestion(Question question);
+        QuestionsBuilder WithDefaultPlayers();
     }
     public interface QuestionsBuilder
     {
-        QuestionsBuilder AddQuestion(Question question);
+        IGameBuilder AddQuestion(Question question);
+        IGameBuilder WithDefaultQuestions();
+    }
+    public interface IGameBuilder
+    {
+        IGameBuilder AddQuestion(Question question);
         Game StartGame();
     }
-    public class GameBuilder : PlayerBuilder, QuestionsBuilder
+
+    public class GameBuilder : PlayerBuilder, QuestionsBuilder, IGameBuilder
     {
         private readonly Players players = new Players();
         private readonly Questions questions = new Questions();
@@ -29,22 +36,22 @@ namespace GameModel
             return this;
         }
 
-        public Game WithDefaultQuestions()
+        public IGameBuilder WithDefaultQuestions()
         {
             questions.AddQuestion(
                 new Question("If I was not working in IT, I would be?",
                 new MultipleChoiceOptions()
-                .AddOption(new MultipleChoiceOption("Lion tamer"))
-                .AddOption(new MultipleChoiceOption("Carpenter"))
-                .AddOption(new MultipleChoiceOption("Skiing instructor"))
-                .AddOption(new MultipleChoiceOption("Designer"))
+                .AddOption(new MultipleChoiceOption("Lion tamer", 1))
+                .AddOption(new MultipleChoiceOption("Carpenter", 2))
+                .AddOption(new MultipleChoiceOption("Skiing instructor", 3))
+                .AddOption(new MultipleChoiceOption("Designer", 4))
                 ));
 
             questions.AddQuestion(
                 new Question("Who of us gets most frustrated when a bug is introduced in production",
                 new SelectAPersonOptions(players)));
 
-            return StartGame();
+            return this;
         }
 
         public PlayerBuilder AddPlayer(Player player)
@@ -53,7 +60,13 @@ namespace GameModel
             return this;
         }
 
-        public QuestionsBuilder AddQuestion(Question question)
+        public QuestionsBuilder WithQuestion(Question question)
+        {
+            questions.AddQuestion(question);
+            return this;
+        }
+
+        public IGameBuilder AddQuestion(Question question)
         {
             questions.AddQuestion(question);
             return this;
@@ -73,6 +86,11 @@ namespace GameModel
         public Question GetNextQuestion()
         {
             return Questions.GetNextQuestion();
+        }
+
+        public bool IsLastRound()
+        {
+            return Questions.QuestionsLeft == 1;
         }
 
         public Turn StartTurn()

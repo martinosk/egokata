@@ -5,7 +5,12 @@ namespace GameModel
 {
     public class Guesses
     {
-        private List<Answer> guesses = new List<Answer>();
+        private readonly List<Answer> guesses = new List<Answer>();
+
+        public bool HasGuessed(Player player)
+        {
+            return guesses.Any(f => f.AnsweringPlayer == player);
+        }
 
         internal void AddGuess(Answer answer)
         {
